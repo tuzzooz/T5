@@ -1,25 +1,19 @@
-/*
-  Crie este novo ficheiro em: frontend/src/pages/PagamentosPage.tsx
-  Esta página servirá para registar o consumo de clientes.
-*/
+
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:3001/api';
 
-// Tipagens
 interface Cliente { id: number; nome: string; }
 interface Produto { id: number; nome: string; preco: number; }
 interface Servico { id: number; nome: string; preco: number; }
 interface ConsumoItem { tipo: 'produto' | 'servico'; id: number; nome: string; quantidade: number; precoUnitario: number; }
 
-// Funções de fetch
 const fetchClientes = async (): Promise<Cliente[]> => (await axios.get(`${API_URL}/clientes`)).data;
 const fetchProdutos = async (): Promise<Produto[]> => (await axios.get(`${API_URL}/produtos`)).data;
 const fetchServicos = async (): Promise<Servico[]> => (await axios.get(`${API_URL}/servicos`)).data;
 
-// Função para submeter o consumo
 const postConsumo = async (data: { clienteId: number; items: Omit<ConsumoItem, 'nome' | 'precoUnitario'>[] }) => {
     return axios.post(`${API_URL}/consumos`, data);
 };
@@ -31,7 +25,6 @@ const PagamentosPage: React.FC = () => {
     const [itemToAdd, setItemToAdd] = useState<{ tipo: string; id: string }>({ tipo: '', id: '' });
     const [quantity, setQuantity] = useState(1);
 
-    // Queries para buscar os dados iniciais
     const { data: clientes } = useQuery({ queryKey: ['clientes'], queryFn: fetchClientes });
     const { data: produtos } = useQuery({ queryKey: ['produtos'], queryFn: fetchProdutos });
     const { data: servicos } = useQuery({ queryKey: ['servicos'], queryFn: fetchServicos });
@@ -94,7 +87,6 @@ const PagamentosPage: React.FC = () => {
             <div className="bg-white p-6 rounded-lg shadow-md mb-8">
                 <h2 className="text-2xl font-semibold mb-4">Novo Registo</h2>
                 
-                {/* Selecionar Cliente */}
                 <div className="mb-4">
                     <label htmlFor="cliente-select" className="form-label">1. Selecione o Cliente</label>
                     <select id="cliente-select" className="form-select" onChange={e => setSelectedClientId(parseInt(e.target.value))}>
@@ -102,8 +94,7 @@ const PagamentosPage: React.FC = () => {
                         {clientes?.map(c => <option key={c.id} value={c.id}>{c.nome}</option>)}
                     </select>
                 </div>
-                
-                {/* Adicionar Itens */}
+
                 <div className="mb-4">
                     <label className="form-label">2. Adicione Produtos ou Serviços</label>
                     <div className="row g-2 align-items-end">
@@ -128,7 +119,6 @@ const PagamentosPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Lista de Consumo Atual */}
             {items.length > 0 && (
                 <div className="bg-white p-6 rounded-lg shadow-md">
                     <h3 className="text-xl font-semibold mb-3">Itens a serem registados para: {clientes?.find(c=>c.id === selectedClientId)?.nome}</h3>

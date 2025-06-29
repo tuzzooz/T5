@@ -1,7 +1,3 @@
-/*
-  Ficheiro: backend/src/app.ts
-  Versão completa com todas as rotas CRUD.
-*/
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';

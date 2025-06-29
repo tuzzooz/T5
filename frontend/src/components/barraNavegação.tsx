@@ -15,7 +15,6 @@ const AppNavbar: React.FC = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {/* CORREÇÃO: Os caminhos 'to' foram alterados para inglês para corresponder às rotas em App.tsx */}
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/clients">Clientes</Nav.Link>
             <Nav.Link as={Link} to="/produtos">Produtos</Nav.Link>
