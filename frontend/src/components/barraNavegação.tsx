@@ -17,8 +17,10 @@ const AppNavbar: React.FC = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/clients">Clientes</Nav.Link>
+            <Nav.Link as={Link} to="/pets">Pets</Nav.Link>
             <Nav.Link as={Link} to="/produtos">Produtos</Nav.Link>
             <Nav.Link as={Link} to="/servicos">Serviços</Nav.Link>
+            <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
             <Nav.Link as={Link} to="/payments">Pagamentos</Nav.Link>
           </Nav>
         </Navbar.Collapse>
