@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" 
+  url      = "file:./dev.db"
+}
+
+model Cliente {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String   @unique
+  telefone String?
+
+  pets     Pet[]
+  consumos Consumo[]
+
+  criadoEm    DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@map("clientes")
+}
+
+model Pet {
+  id      Int     @id @default(autoincrement())
+  nome    String
+  tipo    String 
+  raca    String 
+  dono    Cliente @relation(fields: [donoId], references: [id])
+  donoId  Int
+
+  consumos Consumo[]
+
+  criadoEm    DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@map("pets")
+}
+
+model Produto {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  descricao String?
+  preco     Float
+  estoque   Int
+
+  consumos Consumo[]
+
+  criadoEm    DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@map("produtos")
+}
+
+model Servico {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  descricao String?
+  preco     Float
+
+  consumos Consumo[]
+
+  criadoEm    DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@map("servicos")
+}
+
+// Tabela para registrar o consumo de produtos e serviços por um cliente/pet
+model Consumo {
+  id         Int      @id @default(autoincrement())
+  cliente    Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId  Int
+  pet        Pet?     @relation(fields: [petId], references: [id])
+  petId      Int?
+  produto    Produto? @relation(fields: [produtoId], references: [id])
+  produtoId  Int?
+  servico    Servico? @relation(fields: [servicoId], references: [id])
+  servicoId  Int?
+  quantidade Int
+  precoTotal Float
+
+  consumidoEm DateTime @default(now())
+
+  @@map("consumos")
+}
