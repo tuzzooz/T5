@@ -1,46 +1,108 @@
-# Getting Started with Create React App
+## 🚀 Tecnologias Utilizadas (T5)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O projeto é dividido em duas partes principais: um backend construído com Node.js e Express, e um frontend desenvolvido com React.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### Backend
 
-### `npm start`
+O servidor é responsável pela lógica de negócio, comunicação com o banco de dados via Prisma e por servir a API para o cliente.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Dependência | Versão |
+| :--- | :--- |
+| **Node.js** | **16.x+ (recomendado)** |
+| Express | ^5.1.0 |
+| Prisma | ^6.10.1 |
+| TypeScript | ^5.8.3 |
+| ts-node-dev | ^2.0.0 |
+| cors | ^2.8.5 |
+| helmet | ^8.1.0 |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A interface do usuário é uma Single Page Application (SPA) reativa e moderna, construída com a biblioteca React.
 
-### `npm run build`
+| Dependência | Versão |
+| :--- | :--- |
+| **Node.js** | **16.x (obrigatório)** |
+| React | ^19.1.0 |
+| React Router DOM | ^7.6.3 |
+| React Query | ^5.81.5 |
+| Axios | ^1.10.0 |
+| Bootstrap | ^5.3.7 |
+| React-Bootstrap | ^2.10.10 |
+| React Scripts | 5.0.1 |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Atenção:** ⚠️ O frontend utiliza `react-scripts@5.0.1`, que é mais estável com **Node.js na versão 16.x**. Versões mais novas do Node (18.x ou superiores) podem causar erros de compatibilidade. Recomenda-se usar a mesma versão do Node.js para ambos os ambientes.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ⚙️ Como Executar o Projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Siga os passos abaixo para configurar e rodar a aplicação localmente. O projeto requer que tanto o **Backend** quanto o **Frontend** estejam em execução simultaneamente em terminais diferentes.
 
-### `npm run eject`
+### Pré-requisitos
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Antes de começar, certifique-se de que você tem os seguintes softwares instalados:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   **Node.js**: `v16.x` (Obrigatório para compatibilidade com o frontend)
+-   **npm**: `v8.x` ou compatível com o Node 16
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 1. Configurando o Backend
 
-## Learn More
+O backend é responsável por servir a API que o frontend consome.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1.  **Navegue até a pasta do backend:**
+    ```bash
+    cd backend
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure as variáveis de ambiente:**
+    Crie um arquivo chamado `.env` na raiz da pasta `backend` e adicione a seguinte variável. Ela é usada pelo Prisma para se conectar ao banco de dados.
+
+    ```env
+    DATABASE_URL="file:./dev.db"
+    ```
+
+4.  **Execute as migrações do banco de dados:**
+    Este comando irá criar o banco de dados (se não existir) e aplicar todas as tabelas necessárias.
+    ```bash
+    npx prisma migrate dev
+    ```
+
+5.  **Inicie o servidor backend:**
+    ```bash
+    npm run dev
+    ```
+
+✅ O servidor backend estará em execução, geralmente em `http://localhost:3001`. Mantenha este terminal aberto.
+
+---
+
+### 2. Configurando o Frontend
+
+Agora, em um **novo terminal**, vamos configurar e iniciar a interface do usuário.
+
+1.  **Navegue até a pasta do frontend:**
+    ```bash
+    cd frontend
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+
+3.  **Inicie a aplicação React:**
+    ```bash
+    npm start
+    ```
+
+✅ O React iniciará o servidor de desenvolvimento e abrirá a aplicação automaticamente no seu navegador, disponível em `http://localhost:3000`.
