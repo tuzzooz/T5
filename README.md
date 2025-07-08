@@ -1,6 +1,6 @@
 ## 🚀 Tecnologias Utilizadas (T5)
 
-O projeto é dividido em duas partes principais: um backend construído com Node.js e Express, e um frontend desenvolvido com React.
+O projeto é dividido em duas partes principais: um backend construído com Node.js e Prisma, e um frontend desenvolvido com React.
 
 ---
 
